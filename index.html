@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPPOLO | Electronic Music Producer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ === */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; transition: 0.3s; }
+        
+        /* === 2. ГЛАВНЫЙ ЭКРАН (HERO) === */
+        .hero {
+            height: 100vh;
+            background-image: url('cover.jpg'); /* Твоя обложка */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        h1 {
+            font-size: 90px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin: 0;
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            color: #ccc;
+        }
+
+        .hero-btn {
+            margin-top: 50px;
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.7);
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            display: inline-block;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .hero-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* === 3. СЕКЦИЯ МУЗЫКИ === */
+        .music-section {
+            padding: 100px 20px;
+            background-color: #050505;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;       /* <--- Увеличили (было 24px) */
+            font-weight: 700;      /* Жирный, чтобы выделялся */
+            letter-spacing: 6px;   /* Добавили еще больше воздуха */
+            margin-bottom: 70px;   /* Чуть больше отступ снизу */
+            color: #666;           /* Серый цвет, чтобы не спорил с белым текстом */
+            text-transform: uppercase;
+        }
+
+        .music-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .release-card {
+            width: 350px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cover-art {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .cover-art:hover {
+            transform: scale(1.02);
+        }
+
+        .track-info {
+            margin-top: 25px;
+        }
+
+        .track-title {
+            font-size: 26px;
+            font-weight: 400;      /* Элегантный тонкий шрифт */
+            margin: 0;
+            
+            /* ГЛАВНОЕ ИЗМЕНЕНИЕ: */
+            text-transform: none;  /* Отключаем принудительный капслок */
+            
+            letter-spacing: 1px;   /* Для строчных букв отступ лучше сделать поменьше */
+            line-height: 1.4;
+        }
+
+        .track-desc {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* КНОПКИ */
+        .listen-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid #333;
+            color: #fff;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            margin-top: 5px; 
+        }
+
+        .sp-btn:hover {
+            background-color: #1DB954;
+            border-color: #1DB954;
+            color: white;
+            box-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
+        }
+
+        .sc-btn:hover {
+            background-color: #ff5500;
+            border-color: #ff5500;
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 85, 0, 0.4);
+        }
+
+        .bp-btn:hover {
+            background-color: #02FF95;
+            border-color: #02FF95;
+            color: black;
+            box-shadow: 0 0 15px rgba(2, 255, 149, 0.4);
+        }
+
+        /* === 4. КОНТАКТЫ === */
+        .contact-section {
+            padding: 100px 20px 50px;
+            text-align: center;
+            background: linear-gradient(to top, #000 0%, #050505 100%);
+        }
+
+        .email-link {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+        
+        .email-link:hover {
+            color: #fff;
+            border-color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .socials {
+            margin-top: 50px;
+        }
+        
+        .social-icon {
+            font-size: 28px;
+            margin: 0 20px;
+            color: #555;
+            transition: 0.3s;
+        }
+
+        .social-icon:hover {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* === 5. ПОДВАЛ И ЛОГОТИП === */
+        footer {
+            padding: 40px 0 60px;
+            text-align: center;
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* НАСТРОЙКИ ЛОГОТИПА */
+        .footer-logo {
+            width: 120px; /* Размер логотипа */
+            height: auto;
+            margin-bottom: 10px; /* <--- ИСПРАВЛЕНО: было 20px, стало 10px (ближе к тексту) */
+            opacity: 0.8; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 52px; letter-spacing: 3px; }
+            .subtitle { font-size: 13px; }
+            .music-grid { gap: 60px; }
+            .email-link { font-size: 20px; }
+            .social-icon { margin: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>IPPOLO</h1>
+            <div class="subtitle">Electronic Music Producer • DJ</div>
+            <a href="#music" class="hero-btn">Listen Mixes</a>
+        </div>
+    </section>
+
+    <section id="music" class="music-section">
+        <div class="section-title">Latest Releases</div>
+        
+        <div class="music-grid">
+
+            <div class="release-card">
+                <img src="track1.jpg" alt="Release Cover" class="cover-art">
+                <div class="track-info">
+                    <h2 class="track-title">CASCADE</h2>
+                    <div class="track-desc">Radio Edit</div>
+                    
+                    <a href="https://open.spotify.com/track/4abrsIl3C6A3lK8H0OG8Gz?si=21b6db60d1ab4f48" target="_blank" class="listen-btn sp-btn">
+                        <i class="fab fa-spotify"></i> Listen on Spotify
+                    </a>
+                </div>
+            </div>
+
+            <div class="release-card">
+                <img src="track2.jpg" alt="Release Cover" class="cover-art">
+                <div class="track-info">
+                    <h2 class="track-title">M.o.o.N</h2>
+                    <div class="track-desc">Extended Mix</div>
+                    
+                    <a href="https://www.beatport.com/release/moon/5496262" target="_blank" class="listen-btn bp-btn">
+                        <i class="fas fa-cart-shopping"></i> Buy on Beatport
+                    </a>
+                </div>
+            </div>
+
+            <div class="release-card">
+                <img src="track3.jpg" alt="Mix Cover" class="cover-art">
+                <div class="track-info">
+                    <h2 class="track-title">A RAY OF SUNSHINE</h2>
+                    <div class="track-desc">EP</div>
+                    
+                    <a href="https://soundcloud.com/coraltiderecords/sets/a-ray-of-sunshine-ct008?si=6f099a79cb6b43588154da638c8c0ae3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="listen-btn sc-btn">
+                        <i class="fab fa-soundcloud"></i> On SoundCloud
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact-section">
+        
+        <div class="section-title" style="margin-bottom: 30px;">Booking & Contact</div>
+        
+        <p style="color: #888; margin-bottom: 30px; font-size: 14px; letter-spacing: 1px;">
+            Available for festivals & club shows worldwide
+        </p>
+       
+        <a href="mailto:dj.ippolo@gmail.com" class="email-link">dj.ippolo@gmail.com</a>
+
+        <div class="socials">
+            <a href="https://instagram.com/dj_ippolo" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://soundcloud.com/djippolo" target="_blank" class="social-icon"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://open.spotify.com/artist/4B4pq3m4pT9HcpXyIOo0Tm?si=1aba8vIHRb67WjTf5DSikw" target="_blank" class="social-icon"><i class="fab fa-spotify"></i></a>
+            <a href="https://www.beatport.com/artist/ippolo/190374" target="_blank" class="social-icon"><i class="fas fa-compact-disc"></i></a>
+            <a href="https://www.facebook.com/ippolitshingirey" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <img src="logo.png" alt="Logo" class="footer-logo">
+        <div>© 2025 IPPOLO Music. All rights reserved.</div>
+    </footer>
+
+</body>
+</html>
