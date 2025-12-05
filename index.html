@@ -270,3 +270,253 @@
             filter: grayscale(100%) brightness(200%);
             transition: 0.3s;
         }
+
+        .label-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .bio-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 20px 20px 0px rgba(20, 20, 20, 1);
+            filter: grayscale(20%);
+            transition: 0.5s;
+        }
+
+        .bio-image img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.01);
+        }
+
+        /* === 5. КОНТАКТЫ === */
+        .contact-section {
+            padding: 100px 20px 50px;
+            text-align: center;
+            background: linear-gradient(to top, #000 0%, #0a0a0a 100%);
+        }
+
+        .email-link {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+        
+        .email-link:hover {
+            color: #fff;
+            border-color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .socials { margin-top: 50px; }
+        
+        .social-icon { 
+            font-size: 28px; 
+            margin: 0 20px; 
+            color: #555; 
+            transition: 0.3s; 
+        }
+        
+        .social-icon:hover { 
+            transform: translateY(-3px); 
+        }
+
+        /* === НОВЫЕ ЦВЕТА СОЦСЕТЕЙ ПРИ НАВЕДЕНИИ === */
+        /* Instagram (Розовый) */
+        .social-ig:hover { color: #E1306C; text-shadow: 0 0 15px rgba(225, 48, 108, 0.5); }
+        
+        /* Facebook (Синий) */
+        .social-fb:hover { color: #1877F2; text-shadow: 0 0 15px rgba(24, 119, 242, 0.5); }
+        
+        /* SoundCloud (Оранжевый) */
+        .social-sc:hover { color: #ff5500; text-shadow: 0 0 15px rgba(255, 85, 0, 0.5); }
+        
+        /* Spotify (Зеленый) */
+        .social-sp:hover { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
+        
+        /* Beatport (Ярко-бирюзовый) */
+        .social-bp:hover { color: #02FF95; text-shadow: 0 0 15px rgba(2, 255, 149, 0.5); }
+
+
+        footer {
+            padding: 40px 0 60px;
+            text-align: center;
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo { width: 120px; height: auto; margin-bottom: 10px; opacity: 0.8; }
+
+        /* АНИМАЦИЯ СКРОЛЛА */
+        .hidden-element {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .show-element {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 52px; letter-spacing: 3px; }
+            .music-grid { gap: 60px; }
+            .bio-container {
+                flex-direction: column-reverse;
+                gap: 30px;
+            }
+            .bio-text { text-align: center; }
+            .labels-row { text-align: center; }
+            .labels-list { justify-content: center; } 
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-content hidden-element">
+            <h1>IPPOLO</h1>
+            <div class="subtitle">Electronic Music Producer • DJ</div>
+            <a href="#music" class="hero-btn">Listen Mixes</a>
+        </div>
+    </section>
+
+    <section id="music" class="music-section">
+        <div class="section-title hidden-element">Latest Releases</div>
+        
+        <div class="music-grid">
+
+            <div class="release-card hidden-element">
+                <img src="track1.jpg" alt="Release Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <div class="track-info">
+                    <h2 class="track-title">Cascade</h2>
+                    <div class="track-desc">Radio Edit</div>
+                    <a href="https://open.spotify.com/track/4abrsIl3C6A3lK8H0OG8Gz?si=21b6db60d1ab4f48" target="_blank" class="listen-btn sp-btn">
+                        <i class="fab fa-spotify"></i> Listen on Spotify
+                    </a>
+                </div>
+            </div>
+
+            <div class="release-card hidden-element">
+                <img src="track2.jpg" alt="Release Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <div class="track-info">
+                    <h2 class="track-title">M.o.o.N</h2>
+                    <div class="track-desc">Extended Mix</div>
+                    <a href="https://www.beatport.com/release/moon/5496262" target="_blank" class="listen-btn bp-btn">
+                        <i class="fas fa-cart-shopping"></i> Buy on Beatport
+                    </a>
+                </div>
+            </div>
+
+            <div class="release-card hidden-element">
+                <img src="track3.jpg" alt="Mix Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <div class="track-info">
+                    <h2 class="track-title">A Ray Of Sunshine</h2>
+                    <div class="track-desc">EP</div>
+                    <a href="https://soundcloud.com/coraltiderecords/sets/a-ray-of-sunshine-ct008?si=6f099a79cb6b43588154da638c8c0ae3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="listen-btn sc-btn">
+                        <i class="fab fa-soundcloud"></i> On SoundCloud
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bio-section">
+        <div class="bio-container">
+            <div class="bio-text hidden-element">
+                <h2>ABOUT ME</h2>
+                <p>
+                    <b>IPPOLO</b> is an electronic music producer based in <b>Minsk, Belarus</b>. With roots tracing back to the vibrant club scene of the 90s, he has evolved a unique style that blends Organic House, Progressive, and Trance.
+                </p>
+                <p>
+                    Inspired by legends like <b>Jean-Michel Jarre, Kraftwerk, and ATB</b>, his tracks have reached the <b>Top 100 on Beatport</b> (Organic House). 
+                </p>
+                
+                <p style="font-style: italic; color: #fff;">
+                    "I believe that every person is a whole universe. My mission is to create a cozy, safe world around you through sound - a place without problems, wars, or conflicts."
+                </p>
+                
+                <a href="#" class="pk-btn"><i class="fas fa-download"></i> Download Press Kit</a>
+
+                <div class="labels-row">
+                    <div class="labels-title">Releases on</div>
+                    
+                    <div class="labels-list">
+                        
+                        <a href="https://www.inkognitorecords.com/" target="_blank">
+                            <img src="label1.png" alt="Inkognito Records" class="label-logo" width="120" height="60" loading="lazy">
+                        </a>
+                        
+                        <a href="https://linktr.ee/coraltiderecords" target="_blank">
+                            <img src="label2.png" alt="Coral Tide Records" class="label-logo" width="120" height="60" loading="lazy">
+                        </a>
+                        
+                        <a href="https://www.beatport.com/label/under-pro-records/125950" target="_blank">
+                            <img src="label3.png" alt="Underground Progressions" class="label-logo" width="120" height="60" loading="lazy">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="bio-image hidden-element">
+                <img src="bio.jpg" alt="Ippolo Portrait" width="500" height="500" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        
+        <div class="section-title hidden-element" style="margin-bottom: 30px;">Booking & Contact</div>
+        
+        <p class="hidden-element" style="color: #888; margin-bottom: 30px; font-size: 14px; letter-spacing: 1px;">
+            Available for festivals & club shows worldwide
+        </p>
+       
+        <a href="mailto:dj.ippolo@gmail.com?subject=Booking%20Request" class="email-link hidden-element">dj.ippolo@gmail.com</a>
+
+        <div class="socials hidden-element">
+            <a href="https://www.instagram.com/dj_ippolo/" target="_blank" class="social-icon social-ig"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/ippolitshingirey" target="_blank" class="social-icon social-fb"><i class="fab fa-facebook"></i></a>
+            <a href="https://soundcloud.com/djippolo" target="_blank" class="social-icon social-sc"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://open.spotify.com/artist/4B4pq3m4pT9HcpXyIOo0Tm?si=uPIMJ5UZRhORhw5kqZC7Tw" target="_blank" class="social-icon social-sp"><i class="fab fa-spotify"></i></a>
+            <a href="https://www.beatport.com/artist/ippolo/190374" target="_blank" class="social-icon social-bp"><i class="fas fa-compact-disc"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <img src="logo.png" alt="Logo" class="footer-logo" width="120" height="auto" loading="lazy">
+        <div>© 2025 IPPOLO Music. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-element');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.hidden-element');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+
+</body>
+</html>
