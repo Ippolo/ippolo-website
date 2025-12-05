@@ -41,7 +41,6 @@
             align-items: center;
             text-align: center;
             position: relative;
-            /* Добавлено для оптимизации рендеринга */
             will-change: transform; 
         }
 
@@ -133,12 +132,11 @@
         .cover-art {
             width: 100%;
             height: auto;
-            /* Сохраняем пропорции, чтобы не было прыжков верстки */
             aspect-ratio: 1 / 1; 
             border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s;
-            background-color: #111; /* Заглушка пока грузится фото */
+            background-color: #111;
         }
 
         .cover-art:hover {
@@ -341,7 +339,7 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 1s ease-out;
-            will-change: opacity, transform; /* Подсказка браузеру для оптимизации */
+            will-change: opacity, transform;
         }
 
         .show-element {
@@ -486,8 +484,6 @@
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show-element');
-                    // Хорошая практика: перестать наблюдать за элементом после того, как он появился,
-                    // чтобы разгрузить процессор.
                     observer.unobserve(entry.target);
                 }
             });
