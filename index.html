@@ -11,8 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* === 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ === */
@@ -41,7 +40,6 @@
             align-items: center;
             text-align: center;
             position: relative;
-            will-change: transform; 
         }
 
         .hero::before {
@@ -98,9 +96,9 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
-        /* === 3. СЕКЦИЯ МУЗЫКИ === */
+        /* === 3. СЕКЦИЯ МУЗЫКИ (ТРЕКИ) === */
         .music-section {
-            padding: 100px 20px;
+            padding: 100px 20px 50px; /* Уменьшил отступ снизу, т.к. следом идут Платформы */
             background-color: #050505;
             text-align: center;
         }
@@ -132,11 +130,9 @@
         .cover-art {
             width: 100%;
             height: auto;
-            aspect-ratio: 1 / 1; 
             border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s;
-            background-color: #111;
         }
 
         .cover-art:hover {
@@ -181,6 +177,63 @@
         .sp-btn:hover { background-color: #1DB954; border-color: #1DB954; color: white; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
         .sc-btn:hover { background-color: #ff5500; border-color: #ff5500; color: white; box-shadow: 0 0 15px rgba(255, 85, 0, 0.4); }
         .bp-btn:hover { background-color: #02FF95; border-color: #02FF95; color: black; box-shadow: 0 0 15px rgba(2, 255, 149, 0.4); }
+
+        /* === 3.1. СЕКЦИЯ ПЛАТФОРМ (НОВАЯ) === */
+        .platforms-section {
+            padding: 20px 20px 100px;
+            background-color: #050505; /* Продолжение фона музыки */
+            text-align: center;
+        }
+
+        .platforms-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .platform-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
+            opacity: 0.5;
+            text-decoration: none;
+        }
+
+        .platform-item:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .platform-icon {
+            font-size: 70px; /* Размер иконок */
+            margin-bottom: 15px;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .platform-name {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        /* Цвета платформ при наведении */
+        .plat-sp:hover .platform-icon { color: #1DB954; text-shadow: 0 0 30px rgba(29, 185, 84, 0.6); }
+        .plat-sp:hover .platform-name { color: #1DB954; }
+
+        .plat-bp:hover .platform-icon { color: #02FF95; text-shadow: 0 0 30px rgba(2, 255, 149, 0.6); }
+        .plat-bp:hover .platform-name { color: #02FF95; }
+
+        .plat-sc:hover .platform-icon { color: #ff5500; text-shadow: 0 0 30px rgba(255, 85, 0, 0.6); }
+        .plat-sc:hover .platform-name { color: #ff5500; }
+
 
         /* === 4. СЕКЦИЯ: БИОГРАФИЯ (BIO) === */
         .bio-section {
@@ -237,6 +290,7 @@
             color: #000;
         }
 
+        /* Настройки для логотипов лейблов */
         .labels-row {
             margin-top: 40px;
             padding-top: 30px;
@@ -329,22 +383,12 @@
             transform: translateY(-3px); 
         }
 
-        /* === НОВЫЕ ЦВЕТА СОЦСЕТЕЙ ПРИ НАВЕДЕНИИ === */
-        /* Instagram (Розовый) */
+        /* Цвета соцсетей в футере */
         .social-ig:hover { color: #E1306C; text-shadow: 0 0 15px rgba(225, 48, 108, 0.5); }
-        
-        /* Facebook (Синий) */
         .social-fb:hover { color: #1877F2; text-shadow: 0 0 15px rgba(24, 119, 242, 0.5); }
-        
-        /* SoundCloud (Оранжевый) */
         .social-sc:hover { color: #ff5500; text-shadow: 0 0 15px rgba(255, 85, 0, 0.5); }
-        
-        /* Spotify (Зеленый) */
         .social-sp:hover { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
-        
-        /* Beatport (Ярко-бирюзовый) */
         .social-bp:hover { color: #02FF95; text-shadow: 0 0 15px rgba(2, 255, 149, 0.5); }
-
 
         footer {
             padding: 40px 0 60px;
@@ -360,12 +404,11 @@
 
         .footer-logo { width: 120px; height: auto; margin-bottom: 10px; opacity: 0.8; }
 
-        /* АНИМАЦИЯ СКРОЛЛА */
+        /* Анимация появления */
         .hidden-element {
             opacity: 0;
             transform: translateY(50px);
             transition: all 1s ease-out;
-            will-change: opacity, transform;
         }
 
         .show-element {
@@ -383,6 +426,8 @@
             .bio-text { text-align: center; }
             .labels-row { text-align: center; }
             .labels-list { justify-content: center; } 
+            .platforms-grid { gap: 40px; }
+            .platform-icon { font-size: 50px; }
         }
     </style>
 </head>
@@ -402,7 +447,7 @@
         <div class="music-grid">
 
             <div class="release-card hidden-element">
-                <img src="track1.jpg" alt="Release Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <img src="track1.jpg" alt="Release Cover" class="cover-art" loading="lazy">
                 <div class="track-info">
                     <h2 class="track-title">Cascade</h2>
                     <div class="track-desc">Radio Edit</div>
@@ -413,7 +458,7 @@
             </div>
 
             <div class="release-card hidden-element">
-                <img src="track2.jpg" alt="Release Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <img src="track2.jpg" alt="Release Cover" class="cover-art" loading="lazy">
                 <div class="track-info">
                     <h2 class="track-title">M.o.o.N</h2>
                     <div class="track-desc">Extended Mix</div>
@@ -424,7 +469,7 @@
             </div>
 
             <div class="release-card hidden-element">
-                <img src="track3.jpg" alt="Mix Cover" class="cover-art" width="350" height="350" loading="lazy">
+                <img src="track3.jpg" alt="Mix Cover" class="cover-art" loading="lazy">
                 <div class="track-info">
                     <h2 class="track-title">A Ray Of Sunshine</h2>
                     <div class="track-desc">EP</div>
@@ -433,6 +478,31 @@
                     </a>
                 </div>
             </div>
+
+        </div>
+    </section>
+
+    <section class="platforms-section">
+        <div class="section-title hidden-element" style="font-size: 18px; margin-bottom: 30px; opacity: 0.6; letter-spacing: 4px;">
+            Stream On
+        </div>
+
+        <div class="platforms-grid hidden-element">
+            
+            <a href="https://open.spotify.com/artist/4B4pq3m4pT9HcpXyIOo0Tm?si=uPIMJ5UZRhORhw5kqZC7Tw" target="_blank" class="platform-item plat-sp">
+                <i class="fab fa-spotify platform-icon"></i>
+                <span class="platform-name">Spotify</span>
+            </a>
+
+            <a href="https://www.beatport.com/artist/ippolo/190374" target="_blank" class="platform-item plat-bp">
+                <i class="fas fa-compact-disc platform-icon"></i>
+                <span class="platform-name">Beatport</span>
+            </a>
+
+            <a href="https://soundcloud.com/djippolo" target="_blank" class="platform-item plat-sc">
+                <i class="fab fa-soundcloud platform-icon"></i>
+                <span class="platform-name">SoundCloud</span>
+            </a>
 
         </div>
     </section>
@@ -458,25 +528,23 @@
                     <div class="labels-title">Releases on</div>
                     
                     <div class="labels-list">
-                        
                         <a href="https://www.inkognitorecords.com/" target="_blank">
-                            <img src="label1.png" alt="Inkognito Records" class="label-logo" width="120" height="60" loading="lazy">
+                            <img src="label1.png" alt="Inkognito Records" class="label-logo" loading="lazy">
                         </a>
                         
                         <a href="https://linktr.ee/coraltiderecords" target="_blank">
-                            <img src="label2.png" alt="Coral Tide Records" class="label-logo" width="120" height="60" loading="lazy">
+                            <img src="label2.png" alt="Coral Tide Records" class="label-logo" loading="lazy">
                         </a>
                         
                         <a href="https://www.beatport.com/label/under-pro-records/125950" target="_blank">
-                            <img src="label3.png" alt="Underground Progressions" class="label-logo" width="120" height="60" loading="lazy">
+                            <img src="label3.png" alt="Underground Progressions" class="label-logo" loading="lazy">
                         </a>
-
                     </div>
                 </div>
             </div>
 
             <div class="bio-image hidden-element">
-                <img src="bio.jpg" alt="Ippolo Portrait" width="500" height="500" loading="lazy">
+                <img src="bio.jpg" alt="Ippolo Portrait" loading="lazy">
             </div>
         </div>
     </section>
@@ -501,7 +569,7 @@
     </section>
 
     <footer>
-        <img src="logo.png" alt="Logo" class="footer-logo" width="120" height="auto" loading="lazy">
+        <img src="logo.png" alt="Logo" class="footer-logo" loading="lazy">
         <div>© 2025 IPPOLO Music. All rights reserved.</div>
     </footer>
 
@@ -510,7 +578,6 @@
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show-element');
-                    observer.unobserve(entry.target);
                 }
             });
         });
