@@ -9,9 +9,7 @@
     
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-    
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    
     <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
 
     <meta property="og:title" content="IPPOLO | Electronic Music Producer">
@@ -44,6 +42,38 @@
 
         a { text-decoration: none; transition: 0.3s; }
         ul { list-style: none; padding: 0; margin: 0; }
+
+        /* === 1.2. ПРЕЛОАДЕР === */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            width: 250px; 
+            height: auto;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.3; transform: scale(0.95); }
+        }
 
         /* === 1.5. НАВИГАЦИОННОЕ МЕНЮ === */
         .navbar {
@@ -106,46 +136,29 @@
             transition: 0.3s;
         }
 
-        .nav-link:hover::after {
+        .nav-link:hover::after,
+        .nav-link.active::after { 
             width: 100%;
         }
-
-        /* Гамбургер для мобильных */
-        .hamburger {
-            display: none;
-            cursor: pointer;
+        
+        .nav-link.active {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        .bar {
-            display: block;
-            width: 25px;
-            height: 2px;
-            margin: 5px auto;
-            background-color: #fff;
-            transition: 0.3s;
-        }
+        /* Гамбургер */
+        .hamburger { display: none; cursor: pointer; }
+        .bar { display: block; width: 25px; height: 2px; margin: 5px auto; background-color: #fff; transition: 0.3s; }
 
-        /* Адаптив меню */
         @media (max-width: 768px) {
             .hamburger { display: block; }
-
             .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 60px;
-                gap: 0;
-                flex-direction: column;
-                background-color: #000;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                position: fixed; left: -100%; top: 60px; gap: 0;
+                flex-direction: column; background-color: #000; width: 100%;
+                text-align: center; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1);
             }
-
             .nav-item { margin: 25px 0; }
-
             .nav-menu.active { left: 0; }
-
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -154,29 +167,43 @@
         /* === 2. ГЛАВНЫЙ ЭКРАН (HERO) === */
         .hero {
             height: 100vh;
-            background-image: url('cover.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
+            overflow: hidden; 
+            background-image: url('cover.jpg'); 
+            background-size: cover;
+            background-position: center 20%; 
+            z-index: 1; 
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center 20%; z-index: -1; 
         }
 
         .hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            z-index: 0; 
+            background: 
+                linear-gradient(to top left, #000 0%, #000 15%, transparent 50%),
+                radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%),
+                rgba(0, 0, 0, 0.3);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -190,16 +217,23 @@
         }
 
         .subtitle {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-top: 25px;
             text-transform: uppercase;
-            color: #ccc;
+            color: #ffffff;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .hero-btn {
-            margin-top: 50px;
+            margin-top: 40px;
             padding: 15px 40px;
             border: 1px solid rgba(255,255,255,0.7);
             color: #fff;
@@ -244,183 +278,95 @@
         }
 
         .upcoming-card:hover {
-            transform: translateY(-5px);
             border-color: #00e5ff;
             box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
+            transform: translateY(-5px); /* Простой подъем вместо наклона */
         }
 
         .upcoming-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #00e5ff;
-            color: #000;
-            font-size: 10px;
-            font-weight: 900;
-            padding: 6px 15px;
-            border-radius: 20px;
+            top: 20px; right: 20px;
+            background: #00e5ff; color: #000;
+            font-size: 10px; font-weight: 900;
+            padding: 6px 15px; border-radius: 20px;
             letter-spacing: 1px;
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
             font-family: 'Montserrat', sans-serif;
         }
 
         .upcoming-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 10px;
-            object-fit: cover; 
-            flex-shrink: 0; 
+            width: 250px; height: 250px;
+            border-radius: 10px; object-fit: cover; flex-shrink: 0; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .upcoming-content {
-            flex: 1;
-            text-align: left;
-        }
+        .upcoming-content { flex: 1; text-align: left; }
 
         .upcoming-label {
-            color: #00e5ff;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            font-weight: 500;
-            font-family: 'Montserrat', sans-serif; 
+            color: #00e5ff; font-size: 13px; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 15px;
+            font-weight: 500; font-family: 'Montserrat', sans-serif; 
         }
 
         .upcoming-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 45px;
-            font-weight: 900;
-            margin: 0 0 15px 0;
-            line-height: 1;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+            font-family: 'Montserrat', sans-serif; font-size: 45px;
+            font-weight: 900; margin: 0 0 15px 0; line-height: 1;
+            text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         .upcoming-date {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            color: #aaa;
-            margin-bottom: 35px;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif; font-size: 16px;
+            font-weight: 400; color: #aaa; margin-bottom: 35px; letter-spacing: 2px;
         }
 
         .presave-btn {
-            display: inline-block;
-            padding: 18px 45px;
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-            cursor: pointer;
-            border-radius: 50px;
+            display: inline-block; padding: 18px 45px;
+            background: transparent; color: #fff;
+            border: 2px solid #fff; font-size: 13px;
+            font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; position: relative;
+            overflow: hidden; transition: 0.4s;
+            cursor: pointer; border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
         }
 
         .presave-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%;
-            height: 100%;
+            content: ''; position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
             transition: 0.5s;
         }
 
-        .presave-btn:hover {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-        }
-        
-        .presave-btn:hover::before {
-            left: 100%;
-        }
+        .presave-btn:hover { background: #fff; color: #000; box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
+        .presave-btn:hover::before { left: 100%; }
 
         /* === 3. СЕКЦИЯ МУЗЫКИ === */
-        .music-section {
-            padding: 50px 20px 50px;
-            background-color: #050505;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: 6px;
-            margin-bottom: 70px;
-            color: #666;
-            text-transform: uppercase;
-        }
-
-        .music-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .music-section { padding: 50px 20px 50px; background-color: #050505; text-align: center; }
+        .section-title { font-size: 36px; font-weight: 700; letter-spacing: 6px; margin-bottom: 70px; color: #666; text-transform: uppercase; }
+        .music-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 50px; max-width: 1200px; margin: 0 auto; }
 
         .release-card {
-            width: 350px;
-            text-align: center;
-            margin-bottom: 20px;
+            width: 350px; text-align: center; margin-bottom: 20px;
         }
 
         .cover-art {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
+            width: 100%; height: auto; border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s;
         }
-
-        .cover-art:hover {
+        
+        .release-card:hover .cover-art {
             transform: scale(1.02);
         }
 
-        .track-info {
-            margin-top: 25px;
-        }
-
-        .track-title {
-            font-size: 26px;
-            font-weight: 400;
-            margin: 0;
-            text-transform: none; 
-            letter-spacing: 1px;
-            line-height: 1.4;
-        }
-
-        .track-desc {
-            font-size: 13px;
-            color: #888;
-            margin-top: 8px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .track-info { margin-top: 25px; }
+        .track-title { font-size: 26px; font-weight: 400; margin: 0; text-transform: none; letter-spacing: 1px; line-height: 1.4; }
+        .track-desc { font-size: 13px; color: #888; margin-top: 8px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
 
         .listen-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 1px solid #333;
-            color: #fff;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 1px;
-            border-radius: 30px;
-            text-transform: uppercase;
-            margin-top: 5px; 
+            display: inline-block; padding: 12px 30px; border: 1px solid #333;
+            color: #fff; font-weight: 600; font-size: 12px; letter-spacing: 1px;
+            border-radius: 30px; text-transform: uppercase; margin-top: 5px; 
         }
 
         .sp-btn:hover { background-color: #1DB954; border-color: #1DB954; color: white; box-shadow: 0 0 15px rgba(29, 185, 84, 0.4); }
@@ -428,269 +374,64 @@
         .bp-btn:hover { background-color: #02FF95; border-color: #02FF95; color: black; box-shadow: 0 0 15px rgba(2, 255, 149, 0.4); }
 
         /* === 3.1. СЕКЦИЯ ПЛАТФОРМ === */
-        .platforms-section {
-            padding: 20px 20px 100px;
-            background-color: #050505;
-            text-align: center;
-        }
-
-        .platforms-grid {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 70px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .platform-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: 0.3s;
-            opacity: 0.5;
-            text-decoration: none;
-            width: 100px; 
-        }
-
-        .platform-item:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .platform-icon {
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            width: 80px;  
-            height: 80px; 
-            font-size: 60px; 
-            margin-bottom: 15px;
-            color: #fff;
-            transition: 0.3s;
-        }
-        
-        .plat-sc .platform-icon {
-            font-size: 50px; 
-            transform: scale(1.2); 
-        }
-
-        .platform-name {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #666;
-            transition: 0.3s;
-            white-space: nowrap; 
-        }
-
-        .plat-sp:hover .platform-icon { color: #1DB954; text-shadow: 0 0 30px rgba(29, 185, 84, 0.6); }
-        .plat-sp:hover .platform-name { color: #1DB954; }
-
-        .plat-bp:hover .platform-icon { color: #02FF95; text-shadow: 0 0 30px rgba(2, 255, 149, 0.6); }
-        .plat-bp:hover .platform-name { color: #02FF95; }
-
-        .plat-sc:hover .platform-icon { color: #ff5500; text-shadow: 0 0 30px rgba(255, 85, 0, 0.6); }
-        .plat-sc:hover .platform-name { color: #ff5500; }
-
+        .platforms-section { padding: 20px 20px 100px; background-color: #050505; text-align: center; }
+        .platforms-grid { display: flex; justify-content: center; align-items: flex-start; gap: 70px; flex-wrap: wrap; margin-top: 20px; }
+        .platform-item { display: flex; flex-direction: column; align-items: center; transition: 0.3s; opacity: 0.5; text-decoration: none; width: 100px; }
+        .platform-item:hover { opacity: 1; transform: scale(1.1); }
+        .platform-icon { display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; font-size: 60px; margin-bottom: 15px; color: #fff; transition: 0.3s; }
+        .plat-sc .platform-icon { font-size: 50px; transform: scale(1.2); }
+        .platform-name { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #666; transition: 0.3s; white-space: nowrap; }
+        .plat-sp:hover .platform-icon { color: #1DB954; text-shadow: 0 0 30px rgba(29, 185, 84, 0.6); } .plat-sp:hover .platform-name { color: #1DB954; }
+        .plat-bp:hover .platform-icon { color: #02FF95; text-shadow: 0 0 30px rgba(2, 255, 149, 0.6); } .plat-bp:hover .platform-name { color: #02FF95; }
+        .plat-sc:hover .platform-icon { color: #ff5500; text-shadow: 0 0 30px rgba(255, 85, 0, 0.6); } .plat-sc:hover .platform-name { color: #ff5500; }
 
         /* === 4. СЕКЦИЯ: БИОГРАФИЯ === */
-        .bio-section {
-            padding: 100px 20px;
-            background-color: #0a0a0a;
-            overflow: hidden;
-        }
+        .bio-section { padding: 100px 20px; background-color: #0a0a0a; overflow: hidden; }
+        .bio-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 60px; }
+        .bio-text { flex: 1; text-align: left; }
+        .bio-text h2 { font-size: 40px; font-weight: 700; margin-bottom: 30px; letter-spacing: 3px; }
+        .bio-text p { font-size: 16px; line-height: 1.8; color: #ccc; margin-bottom: 20px; font-weight: 300; }
+        .pk-btn { display: inline-block; margin-top: 20px; padding: 15px 35px; border: 1px solid #fff; background: transparent; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+        .pk-btn:hover { background: #fff; color: #000; }
 
-        .bio-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 60px;
-        }
+        .labels-row { margin-top: 40px; padding-top: 30px; border-top: 1px solid #222; }
+        .labels-title { font-size: 15px; color: #ccc; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        .labels-list { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 40px; }
+        .label-logo { height: 50px; width: auto; opacity: 0.6; filter: grayscale(100%) brightness(200%); transition: 0.3s; }
+        .label-logo:hover { opacity: 1; filter: grayscale(0%) brightness(100%); }
+        img[src*="label2.png"] { height: 38px; } img[src*="label4.png"] { margin-left: -5px; height: 45px; }
 
-        .bio-text {
-            flex: 1;
-            text-align: left;
-        }
-
-        .bio-text h2 {
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            letter-spacing: 3px;
-        }
-
-        .bio-text p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #ccc;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .pk-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 35px;
-            border: 1px solid #fff;
-            background: transparent;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-        
-        .pk-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        /* === 4.1 ЛОГОТИПЫ ЛЕЙБЛОВ === */
-        .labels-row {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #222;
-        }
-        
-        .labels-title {
-            font-size: 15px;
-            color: #ccc;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-        
-        .labels-list {
-            display: flex;
-            flex-wrap: wrap; 
-            align-items: center; 
-            justify-content: flex-start; 
-            gap: 40px; 
-        }
-
-        .label-logo {
-            height: 50px;
-            width: auto;
-            opacity: 0.6; 
-            filter: grayscale(100%) brightness(200%);
-            transition: 0.3s;
-        }
-
-        .label-logo:hover {
-            opacity: 1;
-            filter: grayscale(0%) brightness(100%);
-        }
-
-        img[src*="label2.png"] { height: 38px; }
-        img[src*="label4.png"] { margin-left: -5px; height: 45px; }
-
-        .bio-image {
-            flex: 1;
-            position: relative;
-        }
-
-        .bio-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 20px 20px 0px rgba(20, 20, 20, 1);
-            filter: grayscale(20%);
-            transition: 0.5s;
-        }
-
-        .bio-image img:hover {
-            filter: grayscale(0%);
-            transform: scale(1.01);
-        }
+        .bio-image { flex: 1; position: relative; }
+        .bio-image img { width: 100%; height: auto; border-radius: 4px; box-shadow: 20px 20px 0px rgba(20, 20, 20, 1); filter: grayscale(20%); transition: 0.5s; }
+        .bio-image img:hover { filter: grayscale(0%); transform: scale(1.01); }
 
         /* === 5. КОНТАКТЫ === */
-        .contact-section {
-            padding: 100px 20px 50px;
-            text-align: center;
-            background: linear-gradient(to top, #000 0%, #0a0a0a 100%);
-        }
-
-        .email-link {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-            padding-bottom: 5px;
-        }
-        
-        .email-link:hover {
-            color: #fff;
-            border-color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
+        .contact-section { padding: 100px 20px 50px; text-align: center; background: linear-gradient(to top, #000 0%, #0a0a0a 100%); }
+        .email-link { font-size: 20px; font-weight: 700; color: #fff; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 5px; }
+        .email-link:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .socials { margin-top: 50px; }
-        
-        .social-icon { 
-            font-size: 28px; 
-            margin: 0 20px; 
-            color: #555; 
-            transition: 0.3s; 
-        }
-        
-        .social-icon:hover { 
-            transform: translateY(-3px); 
-        }
-
+        .social-icon { font-size: 28px; margin: 0 20px; color: #555; transition: 0.3s; }
+        .social-icon:hover { transform: translateY(-3px); }
         .social-ig:hover { color: #E1306C; text-shadow: 0 0 15px rgba(225, 48, 108, 0.5); }
         .social-fb:hover { color: #1877F2; text-shadow: 0 0 15px rgba(24, 119, 242, 0.5); }
         .social-sc:hover { color: #ff5500; text-shadow: 0 0 15px rgba(255, 85, 0, 0.5); }
         .social-sp:hover { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
         .social-bp:hover { color: #02FF95; text-shadow: 0 0 15px rgba(2, 255, 149, 0.5); }
 
-        footer {
-            padding: 40px 0 60px;
-            text-align: center;
-            font-size: 11px;
-            color: #333;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        footer { padding: 40px 0 60px; text-align: center; font-size: 11px; color: #333; letter-spacing: 1px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; }
         .footer-logo { width: 120px; height: auto; margin-bottom: 10px; opacity: 0.8; }
 
-        .hidden-element {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
-        }
-
-        .show-element {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .hidden-element { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
+        .show-element { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
             h1 { font-size: 52px; letter-spacing: 3px; }
             .music-grid { gap: 60px; }
-            .bio-container {
-                flex-direction: column-reverse;
-                gap: 30px;
-            }
-            .upcoming-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 30px;
-                padding: 30px 20px;
-            }
+            .bio-container { flex-direction: column-reverse; gap: 30px; }
+            .upcoming-card { flex-direction: column; text-align: center; gap: 30px; padding: 30px 20px; }
             .upcoming-content { text-align: center; }
             .upcoming-title { font-size: 32px; }
             .upcoming-img { width: 100%; max-width: 250px; height: auto; }
-            
             .bio-text { text-align: center; }
             .labels-row { text-align: center; }
             .labels-list { justify-content: center; } 
@@ -700,6 +441,10 @@
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <img src="logo.png" alt="Loading..." class="preloader-logo">
+    </div>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -729,6 +474,10 @@
     </nav>
 
     <section class="hero" id="home">
+        <video autoplay muted loop playsinline preload="auto" class="video-bg">
+            <source src="hero.mp4" type="video/mp4">
+        </video>
+
         <div class="hero-content hidden-element">
             <h1>IPPOLO</h1>
             <div class="subtitle">Electronic Music Producer • DJ</div>
@@ -762,35 +511,41 @@
         <div class="music-grid">
 
             <div class="release-card hidden-element">
-                <img src="track1.jpg" alt="Release Cover" class="cover-art" loading="lazy">
-                <div class="track-info">
-                    <h2 class="track-title">Cascade</h2>
-                    <div class="track-desc">Radio Edit</div>
-                    <a href="https://open.spotify.com/track/4abrsIl3C6A3lK8H0OG8Gz?si=21b6db60d1ab4f48" target="_blank" class="listen-btn sp-btn">
-                        <i class="fab fa-spotify"></i> Listen on Spotify
-                    </a>
+                <div class="card-inner">
+                    <img src="track1.jpg" alt="Release Cover" class="cover-art" loading="lazy">
+                    <div class="track-info">
+                        <h2 class="track-title">Cascade</h2>
+                        <div class="track-desc">Radio Edit</div>
+                        <a href="https://open.spotify.com/track/4abrsIl3C6A3lK8H0OG8Gz?si=21b6db60d1ab4f48" target="_blank" class="listen-btn sp-btn">
+                            <i class="fab fa-spotify"></i> Listen on Spotify
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="release-card hidden-element">
-                <img src="track2.jpg" alt="Release Cover" class="cover-art" loading="lazy">
-                <div class="track-info">
-                    <h2 class="track-title">M.o.o.N</h2>
-                    <div class="track-desc">Extended Mix</div>
-                    <a href="https://www.beatport.com/release/moon/5496262" target="_blank" class="listen-btn bp-btn">
-                        <i class="fas fa-cart-shopping"></i> Buy on Beatport
-                    </a>
+                <div class="card-inner">
+                    <img src="track2.jpg" alt="Release Cover" class="cover-art" loading="lazy">
+                    <div class="track-info">
+                        <h2 class="track-title">M.o.o.N</h2>
+                        <div class="track-desc">Extended Mix</div>
+                        <a href="https://www.beatport.com/release/moon/5496262" target="_blank" class="listen-btn bp-btn">
+                            <i class="fas fa-cart-shopping"></i> Buy on Beatport
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="release-card hidden-element">
-                <img src="track3.jpg" alt="Mix Cover" class="cover-art" loading="lazy">
-                <div class="track-info">
-                    <h2 class="track-title">A Ray Of Sunshine</h2>
-                    <div class="track-desc">EP</div>
-                    <a href="https://soundcloud.com/coraltiderecords/sets/a-ray-of-sunshine-ct008?si=6f099a79cb6b43588154da638c8c0ae3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="listen-btn sc-btn">
-                        <i class="fab fa-soundcloud"></i> On SoundCloud
-                    </a>
+                <div class="card-inner">
+                    <img src="track3.jpg" alt="Mix Cover" class="cover-art" loading="lazy">
+                    <div class="track-info">
+                        <h2 class="track-title">A Ray Of Sunshine</h2>
+                        <div class="track-desc">EP</div>
+                        <a href="https://soundcloud.com/coraltiderecords/sets/a-ray-of-sunshine-ct008?si=6f099a79cb6b43588154da638c8c0ae3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="listen-btn sc-btn">
+                            <i class="fab fa-soundcloud"></i> On SoundCloud
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -893,6 +648,35 @@
     </footer>
 
     <script>
+        // === 1. ЛОГИКА ПРЕЛОАДЕРА ===
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 3500); // 3.5 секунды ожидания
+        });
+
+        // === 3. АКТИВНОЕ МЕНЮ (SCROLL SPY) ===
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.onscroll = () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) { 
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((li) => {
+                li.classList.remove("active");
+                if (li.getAttribute("href").includes(current)) {
+                    li.classList.add("active");
+                }
+            });
+        };
+
+        // === 5. АНИМАЦИЯ ПОЯВЛЕНИЯ ===
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -903,16 +687,16 @@
         const hiddenElements = document.querySelectorAll('.hidden-element');
         hiddenElements.forEach((el) => observer.observe(el));
 
+        // === 6. МОБИЛЬНОЕ МЕНЮ ===
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
-        const navLinks = document.querySelectorAll(".nav-link");
-
+        
         hamburger.addEventListener("click", () => {
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
         });
 
-        navLinks.forEach(n => n.addEventListener("click", () => {
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
         }));
