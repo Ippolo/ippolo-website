@@ -96,9 +96,133 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
-        /* === 3. СЕКЦИЯ МУЗЫКИ (ТРЕКИ) === */
+        /* === 2.5. СЕКЦИЯ UPCOMING (СКОРО ВЫЙДЕТ) === */
+        .upcoming-section {
+            padding: 80px 20px 40px;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+        }
+
+        .upcoming-card {
+            background: linear-gradient(145deg, #111, #050505);
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .upcoming-card:hover {
+            transform: translateY(-5px);
+            border-color: #00e5ff;
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
+        }
+
+        .upcoming-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #00e5ff;
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 6px 15px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .upcoming-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 10px;
+            object-fit: cover; 
+            flex-shrink: 0; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .upcoming-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .upcoming-label {
+            color: #00e5ff;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .upcoming-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 45px;
+            font-weight: 900;
+            margin: 0 0 15px 0;
+            line-height: 1;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .upcoming-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #aaa;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+        }
+
+        .presave-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+            cursor: pointer;
+            border-radius: 50px;
+        }
+
+        .presave-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+        }
+
+        .presave-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+        
+        .presave-btn:hover::before {
+            left: 100%;
+        }
+
+        /* === 3. СЕКЦИЯ МУЗЫКИ === */
         .music-section {
-            padding: 100px 20px 50px; /* Уменьшил отступ снизу, т.к. следом идут Платформы */
+            padding: 50px 20px 50px;
             background-color: #050505;
             text-align: center;
         }
@@ -178,17 +302,17 @@
         .sc-btn:hover { background-color: #ff5500; border-color: #ff5500; color: white; box-shadow: 0 0 15px rgba(255, 85, 0, 0.4); }
         .bp-btn:hover { background-color: #02FF95; border-color: #02FF95; color: black; box-shadow: 0 0 15px rgba(2, 255, 149, 0.4); }
 
-        /* === 3.1. СЕКЦИЯ ПЛАТФОРМ (НОВАЯ) === */
+        /* === 3.1. СЕКЦИЯ ПЛАТФОРМ (ОБНОВЛЕНО ДЛЯ ВЫРАВНИВАНИЯ) === */
         .platforms-section {
             padding: 20px 20px 100px;
-            background-color: #050505; /* Продолжение фона музыки */
+            background-color: #050505;
             text-align: center;
         }
 
         .platforms-grid {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Выравнивание по верху, но высоту контролируем иконками */
             gap: 70px;
             flex-wrap: wrap;
             margin-top: 20px;
@@ -201,6 +325,8 @@
             transition: 0.3s;
             opacity: 0.5;
             text-decoration: none;
+            /* Фиксированная ширина элемента поможет держать равные отступы */
+            width: 100px; 
         }
 
         .platform-item:hover {
@@ -208,11 +334,25 @@
             transform: scale(1.1);
         }
 
+        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ИКОНОК */
         .platform-icon {
-            font-size: 70px; /* Размер иконок */
+            /* Создаем фиксированный квадрат для иконки */
+            display: flex;
+            align-items: center; /* Центр по вертикали */
+            justify-content: center; /* Центр по горизонтали */
+            width: 80px;  /* Фиксированная ширина */
+            height: 80px; /* Фиксированная высота */
+            
+            font-size: 60px; /* Размер самой иконки внутри квадрата */
             margin-bottom: 15px;
             color: #fff;
             transition: 0.3s;
+        }
+        
+        /* Визуальная коррекция для SoundCloud, так как иконка визуально "ниже" других */
+        .plat-sc .platform-icon {
+            font-size: 50px; /* Чуть меньше шрифт, чтобы вписалась по ширине */
+            transform: scale(1.2); /* Но чуть увеличим визуально */
         }
 
         .platform-name {
@@ -222,9 +362,10 @@
             text-transform: uppercase;
             color: #666;
             transition: 0.3s;
+            /* Гарантируем, что текст не переносится */
+            white-space: nowrap; 
         }
 
-        /* Цвета платформ при наведении */
         .plat-sp:hover .platform-icon { color: #1DB954; text-shadow: 0 0 30px rgba(29, 185, 84, 0.6); }
         .plat-sp:hover .platform-name { color: #1DB954; }
 
@@ -235,7 +376,7 @@
         .plat-sc:hover .platform-name { color: #ff5500; }
 
 
-        /* === 4. СЕКЦИЯ: БИОГРАФИЯ (BIO) === */
+        /* === 4. СЕКЦИЯ: БИОГРАФИЯ === */
         .bio-section {
             padding: 100px 20px;
             background-color: #0a0a0a;
@@ -290,7 +431,7 @@
             color: #000;
         }
 
-        /* Настройки для логотипов лейблов */
+        /* === 4.1 ЛОГОТИПЫ ЛЕЙБЛОВ === */
         .labels-row {
             margin-top: 40px;
             padding-top: 30px;
@@ -307,18 +448,15 @@
         }
         
         .labels-list {
-            font-size: 14px;
-            color: #fff;
-            font-weight: 600;
-            letter-spacing: 1px;
             display: flex;
             flex-wrap: wrap; 
-            gap: 30px;
             align-items: center; 
+            justify-content: flex-start; 
+            gap: 40px; 
         }
 
         .label-logo {
-            height: 60px;
+            height: 50px;
             width: auto;
             opacity: 0.6; 
             filter: grayscale(100%) brightness(200%);
@@ -328,6 +466,16 @@
         .label-logo:hover {
             opacity: 1;
             filter: grayscale(0%) brightness(100%);
+        }
+
+        /* ПРАВКИ ДЛЯ ЛОГОТИПОВ (из прошлого запроса) */
+        img[src*="label2.png"] {
+            height: 38px;
+        }
+
+        img[src*="label4.png"] {
+            margin-left: -5px; 
+            height: 45px;
         }
 
         .bio-image {
@@ -383,7 +531,6 @@
             transform: translateY(-3px); 
         }
 
-        /* Цвета соцсетей в футере */
         .social-ig:hover { color: #E1306C; text-shadow: 0 0 15px rgba(225, 48, 108, 0.5); }
         .social-fb:hover { color: #1877F2; text-shadow: 0 0 15px rgba(24, 119, 242, 0.5); }
         .social-sc:hover { color: #ff5500; text-shadow: 0 0 15px rgba(255, 85, 0, 0.5); }
@@ -404,7 +551,6 @@
 
         .footer-logo { width: 120px; height: auto; margin-bottom: 10px; opacity: 0.8; }
 
-        /* Анимация появления */
         .hidden-element {
             opacity: 0;
             transform: translateY(50px);
@@ -423,6 +569,16 @@
                 flex-direction: column-reverse;
                 gap: 30px;
             }
+            .upcoming-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+            .upcoming-content { text-align: center; }
+            .upcoming-title { font-size: 32px; }
+            .upcoming-img { width: 100%; max-width: 250px; height: auto; }
+            
             .bio-text { text-align: center; }
             .labels-row { text-align: center; }
             .labels-list { justify-content: center; } 
@@ -438,6 +594,26 @@
             <h1>IPPOLO</h1>
             <div class="subtitle">Electronic Music Producer • DJ</div>
             <a href="#music" class="hero-btn">Listen Mixes</a>
+        </div>
+    </section>
+
+    <section class="upcoming-section">
+        <div class="upcoming-card hidden-element">
+            <div class="upcoming-badge">PRE-ORDER</div>
+            
+            <img src="new-track.jpg" alt="New Release Cover" class="upcoming-img" loading="lazy" decoding="async" width="250" height="250">
+            
+            <div class="upcoming-content">
+                <div class="upcoming-label">New Single Coming Soon</div>
+                
+                <h2 class="upcoming-title">SPIRIT DRIFT</h2> 
+                
+                <div class="upcoming-date">RELEASE DATE: 16.01.2026</div>
+                
+                <a href="#" target="_blank" class="presave-btn">
+                    PRE-ORDER NOW
+                </a>
+            </div>
         </div>
     </section>
 
@@ -490,17 +666,17 @@
         <div class="platforms-grid hidden-element">
             
             <a href="https://open.spotify.com/artist/4B4pq3m4pT9HcpXyIOo0Tm?si=uPIMJ5UZRhORhw5kqZC7Tw" target="_blank" class="platform-item plat-sp">
-                <i class="fab fa-spotify platform-icon"></i>
+                <div class="platform-icon"><i class="fab fa-spotify"></i></div>
                 <span class="platform-name">Spotify</span>
             </a>
 
             <a href="https://www.beatport.com/artist/ippolo/190374" target="_blank" class="platform-item plat-bp">
-                <i class="fas fa-compact-disc platform-icon"></i>
+                <div class="platform-icon"><i class="fas fa-compact-disc"></i></div>
                 <span class="platform-name">Beatport</span>
             </a>
 
             <a href="https://soundcloud.com/djippolo" target="_blank" class="platform-item plat-sc">
-                <i class="fab fa-soundcloud platform-icon"></i>
+                <div class="platform-icon"><i class="fab fa-soundcloud"></i></div>
                 <span class="platform-name">SoundCloud</span>
             </a>
 
@@ -538,6 +714,10 @@
                         
                         <a href="https://www.beatport.com/label/under-pro-records/125950" target="_blank">
                             <img src="label3.png" alt="Underground Progressions" class="label-logo" loading="lazy">
+                        </a>
+
+                        <a href="https://www.beatport.com/label/rynth/73537" target="_blank">
+                            <img src="label4.png" alt="RYNTH" class="label-logo" loading="lazy">
                         </a>
                     </div>
                 </div>
