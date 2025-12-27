@@ -24,22 +24,23 @@
             color: #ffffff;
             scroll-behavior: smooth;
             overflow-x: hidden;
-            /* Чтобы меню не перекрывало заголовки при скролле */
+            /* ВАЖНО: Отступ сверху, чтобы меню не перекрывало заголовки при клике */
             scroll-padding-top: 70px; 
         }
 
         a { text-decoration: none; transition: 0.3s; }
         ul { list-style: none; padding: 0; margin: 0; }
 
-        /* === 1.5. НАВИГАЦИЯ (НОВОЕ) === */
+        /* === 1.5. НАВИГАЦИОННОЕ МЕНЮ (МАТОВОЕ СТЕКЛО) === */
         .navbar {
-            position: fixed;
+            position: fixed; /* Фиксируем сверху */
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 1000; /* Поверх всего остального */
             background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный */
-            backdrop-filter: blur(10px); /* Эффект матового стекла */
+            backdrop-filter: blur(10px); /* Эффект размытия фона */
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px 20px;
             transition: 0.3s;
@@ -80,6 +81,7 @@
             color: #fff;
         }
 
+        /* Линия подчеркивания при наведении */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -87,7 +89,7 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: #fff; /* Или #00e5ff для акцента */
+            background: #fff; 
             transition: 0.3s;
         }
 
@@ -110,13 +112,13 @@
             transition: 0.3s;
         }
 
-        /* Адаптив меню */
+        /* Адаптив меню для мобильных */
         @media (max-width: 768px) {
             .hamburger { display: block; }
 
             .nav-menu {
                 position: fixed;
-                left: -100%;
+                left: -100%; /* Скрыто слева */
                 top: 60px; /* Высота хедера */
                 gap: 0;
                 flex-direction: column;
@@ -129,9 +131,9 @@
 
             .nav-item { margin: 25px 0; }
 
-            .nav-menu.active { left: 0; }
+            .nav-menu.active { left: 0; /* Выезжает */ }
 
-            /* Анимация гамбургера при клике */
+            /* Анимация превращения гамбургера в крестик */
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -271,7 +273,6 @@
             text-transform: uppercase;
             margin-bottom: 15px;
             font-weight: 500;
-            /* ПРИНУДИТЕЛЬНО УСТАНАВЛИВАЕМ ШРИФТ */
             font-family: 'Montserrat', sans-serif; 
         }
 
@@ -309,7 +310,6 @@
             transition: 0.4s;
             cursor: pointer;
             border-radius: 50px;
-            /* ВАЖНО: Гарантируем шрифт Montserrat для кнопки */
             font-family: 'Montserrat', sans-serif;
         }
 
@@ -892,7 +892,7 @@
         const hiddenElements = document.querySelectorAll('.hidden-element');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // Скрипт для мобильного меню
+        // Скрипт для работы МЕНЮ
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
         const navLinks = document.querySelectorAll(".nav-link");
@@ -902,7 +902,7 @@
             navMenu.classList.toggle("active");
         });
 
-        // Закрываем меню при клике на ссылку
+        // Закрываем меню при клике на ссылку (чтобы удобно было на мобильном)
         navLinks.forEach(n => n.addEventListener("click", () => {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
