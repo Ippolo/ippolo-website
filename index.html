@@ -24,9 +24,118 @@
             color: #ffffff;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            /* Чтобы меню не перекрывало заголовки при скролле */
+            scroll-padding-top: 70px; 
         }
 
         a { text-decoration: none; transition: 0.3s; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        /* === 1.5. НАВИГАЦИЯ (НОВОЕ) === */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный */
+            backdrop-filter: blur(10px); /* Эффект матового стекла */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            transition: 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: #ccc;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #fff; /* Или #00e5ff для акцента */
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Гамбургер для мобильных */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 2px;
+            margin: 5px auto;
+            background-color: #fff;
+            transition: 0.3s;
+        }
+
+        /* Адаптив меню */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px; /* Высота хедера */
+                gap: 0;
+                flex-direction: column;
+                background-color: #000;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-item { margin: 25px 0; }
+
+            .nav-menu.active { left: 0; }
+
+            /* Анимация гамбургера при клике */
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        }
         
         /* === 2. ГЛАВНЫЙ ЭКРАН (HERO) === */
         .hero {
@@ -96,7 +205,7 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
-        /* === 2.5. СЕКЦИЯ UPCOMING (СКОРО ВЫЙДЕТ) === */
+        /* === 2.5. СЕКЦИЯ UPCOMING === */
         .upcoming-section {
             padding: 80px 20px 40px;
             background-color: #000;
@@ -162,6 +271,8 @@
             text-transform: uppercase;
             margin-bottom: 15px;
             font-weight: 500;
+            /* ПРИНУДИТЕЛЬНО УСТАНАВЛИВАЕМ ШРИФТ */
+            font-family: 'Montserrat', sans-serif; 
         }
 
         .upcoming-title {
@@ -198,6 +309,8 @@
             transition: 0.4s;
             cursor: pointer;
             border-radius: 50px;
+            /* ВАЖНО: Гарантируем шрифт Montserrat для кнопки */
+            font-family: 'Montserrat', sans-serif;
         }
 
         .presave-btn::before {
@@ -302,7 +415,7 @@
         .sc-btn:hover { background-color: #ff5500; border-color: #ff5500; color: white; box-shadow: 0 0 15px rgba(255, 85, 0, 0.4); }
         .bp-btn:hover { background-color: #02FF95; border-color: #02FF95; color: black; box-shadow: 0 0 15px rgba(2, 255, 149, 0.4); }
 
-        /* === 3.1. СЕКЦИЯ ПЛАТФОРМ (ОБНОВЛЕНО ДЛЯ ВЫРАВНИВАНИЯ) === */
+        /* === 3.1. СЕКЦИЯ ПЛАТФОРМ === */
         .platforms-section {
             padding: 20px 20px 100px;
             background-color: #050505;
@@ -312,7 +425,7 @@
         .platforms-grid {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Выравнивание по верху, но высоту контролируем иконками */
+            align-items: flex-start;
             gap: 70px;
             flex-wrap: wrap;
             margin-top: 20px;
@@ -325,7 +438,6 @@
             transition: 0.3s;
             opacity: 0.5;
             text-decoration: none;
-            /* Фиксированная ширина элемента поможет держать равные отступы */
             width: 100px; 
         }
 
@@ -334,25 +446,21 @@
             transform: scale(1.1);
         }
 
-        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ИКОНОК */
         .platform-icon {
-            /* Создаем фиксированный квадрат для иконки */
             display: flex;
-            align-items: center; /* Центр по вертикали */
-            justify-content: center; /* Центр по горизонтали */
-            width: 80px;  /* Фиксированная ширина */
-            height: 80px; /* Фиксированная высота */
-            
-            font-size: 60px; /* Размер самой иконки внутри квадрата */
+            align-items: center; 
+            justify-content: center; 
+            width: 80px;  
+            height: 80px; 
+            font-size: 60px; 
             margin-bottom: 15px;
             color: #fff;
             transition: 0.3s;
         }
         
-        /* Визуальная коррекция для SoundCloud, так как иконка визуально "ниже" других */
         .plat-sc .platform-icon {
-            font-size: 50px; /* Чуть меньше шрифт, чтобы вписалась по ширине */
-            transform: scale(1.2); /* Но чуть увеличим визуально */
+            font-size: 50px; 
+            transform: scale(1.2); 
         }
 
         .platform-name {
@@ -362,7 +470,6 @@
             text-transform: uppercase;
             color: #666;
             transition: 0.3s;
-            /* Гарантируем, что текст не переносится */
             white-space: nowrap; 
         }
 
@@ -468,15 +575,8 @@
             filter: grayscale(0%) brightness(100%);
         }
 
-        /* ПРАВКИ ДЛЯ ЛОГОТИПОВ (из прошлого запроса) */
-        img[src*="label2.png"] {
-            height: 38px;
-        }
-
-        img[src*="label4.png"] {
-            margin-left: -5px; 
-            height: 45px;
-        }
+        img[src*="label2.png"] { height: 38px; }
+        img[src*="label4.png"] { margin-left: -5px; height: 45px; }
 
         .bio-image {
             flex: 1;
@@ -589,7 +689,34 @@
 </head>
 <body>
 
-    <section class="hero">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">IPPOLO</a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#music" class="nav-link">Music</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#bio" class="nav-link">Bio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
         <div class="hero-content hidden-element">
             <h1>IPPOLO</h1>
             <div class="subtitle">Electronic Music Producer • DJ</div>
@@ -610,7 +737,7 @@
                 
                 <div class="upcoming-date">RELEASE DATE: 16.01.2026</div>
                 
-                <a href="#" target="_blank" class="presave-btn">
+                <a href="https://go.protonradio.com/r/rl0fxJkk7pxWE" target="_blank" class="presave-btn">
                     PRE-ORDER NOW
                 </a>
             </div>
@@ -683,7 +810,7 @@
         </div>
     </section>
 
-    <section class="bio-section">
+    <section class="bio-section" id="bio">
         <div class="bio-container">
             <div class="bio-text hidden-element">
                 <h2>ABOUT ME</h2>
@@ -729,7 +856,7 @@
         </div>
     </section>
 
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
         
         <div class="section-title hidden-element" style="margin-bottom: 30px;">Booking & Contact</div>
         
@@ -754,6 +881,7 @@
     </footer>
 
     <script>
+        // Анимация появления при скролле
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -763,6 +891,22 @@
         });
         const hiddenElements = document.querySelectorAll('.hidden-element');
         hiddenElements.forEach((el) => observer.observe(el));
+
+        // Скрипт для мобильного меню
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Закрываем меню при клике на ссылку
+        navLinks.forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
     </script>
 
 </body>
