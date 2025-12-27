@@ -96,7 +96,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative; /* Важно для позиционирования гамбургера */
+            /* Важно для позиционирования элементов внутри */
+            position: relative; 
         }
 
         .nav-logo {
@@ -105,7 +106,7 @@
             color: #fff;
             letter-spacing: 2px;
             text-transform: uppercase;
-            z-index: 1002; /* Логотип поверх меню */
+            z-index: 1002;
         }
 
         .nav-menu {
@@ -148,62 +149,74 @@
             text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        /* Гамбургер - базовые стили */
-        .hamburger { display: none; cursor: pointer; z-index: 1002; }
+        /* Гамбургер */
+        .hamburger { display: none; cursor: pointer; z-index: 1003; }
         .bar { display: block; width: 25px; height: 2px; margin: 5px auto; background-color: #fff; transition: 0.3s; }
 
-        /* === АДАПТИВ МЕНЮ (ИСПРАВЛЕНО И ВЫРОВНЕНО) === */
+        /* === АДАПТИВ МЕНЮ (ПОЛНОСТЬЮ ИСПРАВЛЕН) === */
         @media (max-width: 768px) {
             .navbar {
-                padding: 15px 20px; /* Стандартные отступы контейнера */
+                padding: 15px 20px;
             }
 
             .hamburger { 
                 display: block; 
-                position: absolute; /* Жесткое позиционирование */
-                right: 50px; /* СДВИНУЛ ВЛЕВО ОТ КРАЯ (было ближе) */
+                position: absolute;
+                right: 0; /* Прижат к правому краю контейнера */
                 top: 50%;
-                transform: translateY(-50%); /* Центрирование по вертикали */
+                transform: translateY(-50%);
+                /* Увеличенная область клика для удобства */
+                padding: 10px; 
+                margin-right: 0;
             }
             
-            /* Когда меню открыто (крестик), он остается там же благодаря absolute */
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
             .nav-menu {
-                position: absolute; 
-                left: -100%; 
-                top: 100%; /* Выпадает ровно под шапкой */
-                width: 100%;
-                height: auto; /* Высота по содержимому (не весь экран) */
-                background-color: #000; /* Плотный черный фон */
+                position: fixed; /* Фиксируем относительно окна браузера */
+                left: 0; 
+                top: 60px; /* Высота навбара, чтобы меню выезжало из-под него */
+                width: 100%; /* Полная ширина экрана */
+                height: auto; /* Высота по контенту */
+                
+                background-color: #000; /* Черный фон */
                 border-bottom: 1px solid rgba(255,255,255,0.2);
-                padding: 40px 0; /* Отступы сверху и снизу списка */
+                padding: 40px 0; /* Отступы внутри меню */
                 
                 flex-direction: column;
-                align-items: center; /* Центрируем элементы по горизонтали */
+                align-items: center; /* Центрируем пункты */
                 justify-content: center;
-                gap: 30px; /* Расстояние между пунктами */
-                transition: 0.3s ease-in-out;
+                gap: 25px;
+                
+                transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s;
+                
+                /* ГЛАВНОЕ ИСПРАВЛЕНИЕ: Прячем край */
+                transform: translateX(-100%); /* Уводим влево */
+                opacity: 0; /* Делаем прозрачным */
+                visibility: hidden; /* Полностью отключаем отрисовку (убирает полоску слева) */
                 z-index: 1001;
             }
             
             .nav-item { 
                 margin: 0; 
                 width: 100%;
-                text-align: center; /* Текст строго по центру */
-                display: flex;      /* Флекс для гарантии центровки */
-                justify-content: center;
+                text-align: center;
             }
 
             .nav-link {
-                font-size: 14px; /* Чуть крупнее для мобильных */
-                padding: 10px;   /* Увеличиваем область клика */
+                font-size: 14px; /* Чуть крупнее шрифт для пальца */
                 display: block;
+                padding: 10px;
             }
             
-            .nav-menu.active { left: 0; }
+            /* Активное состояние меню */
+            .nav-menu.active { 
+                transform: translateX(0); /* Возвращаем на экран */
+                opacity: 1;
+                visibility: visible; /* Включаем отрисовку */
+            }
+            
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         }
         
         /* === 2. ГЛАВНЫЙ ЭКРАН (HERO) === */
@@ -236,6 +249,7 @@
             .video-bg { object-position: center top !important; }
         }
 
+        /* === ВИНЬЕТКА === */
         .hero::before {
             content: '';
             position: absolute;
