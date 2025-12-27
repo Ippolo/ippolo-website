@@ -166,7 +166,9 @@
         
         /* === 2. ГЛАВНЫЙ ЭКРАН (HERO) === */
         .hero {
-            height: 100vh;
+            /* Используем 100dvh для мобильных (учитывает адресную строку) */
+            height: 100vh; 
+            height: 100dvh; 
             position: relative;
             display: flex;
             flex-direction: column;
@@ -183,9 +185,25 @@
         .video-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; object-position: center 20%; z-index: -1; 
+            object-fit: cover; 
+            object-position: center 20%; 
+            z-index: -1; 
         }
 
+        /* === ВАЖНО: АДАПТАЦИЯ ВИДЕО ПОД МОБИЛЬНЫЙ === */
+        @media (max-width: 768px) {
+            .hero {
+                /* На мобильных прижимаем к верху */
+                background-position: center top;
+            }
+            .video-bg {
+                /* На мобильных прижимаем видео к самому верху (0%), 
+                   чтобы голова не обрезалась при зуме */
+                object-position: center top !important;
+            }
+        }
+
+        /* === ВИНЬЕТКА И МАСКИРОВКА === */
         .hero::before {
             content: '';
             position: absolute;
@@ -278,9 +296,9 @@
         }
 
         .upcoming-card:hover {
+            transform: translateY(-5px);
             border-color: #00e5ff;
             box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
-            transform: translateY(-5px); /* Простой подъем вместо наклона */
         }
 
         .upcoming-badge {
