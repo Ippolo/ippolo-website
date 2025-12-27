@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPPOLO | Electronic Music Producer</title>
     
+    <title>IPPOLO | Electronic Music Producer</title>
+    <meta name="description" content="IPPOLO is an electronic music producer (Organic House, Progressive, Trance) based in Minsk. Listen to the latest tracks like 'Spirit Drift' and 'Cascade'.">
+    
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <meta property="og:title" content="IPPOLO | Electronic Music Producer">
+    <meta property="og:description" content="New single 'Spirit Drift' coming soon. Listen to exclusive mixes and tracks.">
+    <meta property="og:url" content="https://ippolo-music.com"> 
+    <meta property="og:image" content="cover.jpg"> 
+    <meta property="og:type" content="music.musician">
+
     <link rel="preload" as="image" href="cover.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,23 +34,22 @@
             color: #ffffff;
             scroll-behavior: smooth;
             overflow-x: hidden;
-            /* ВАЖНО: Отступ сверху, чтобы меню не перекрывало заголовки при клике */
             scroll-padding-top: 70px; 
         }
 
         a { text-decoration: none; transition: 0.3s; }
         ul { list-style: none; padding: 0; margin: 0; }
 
-        /* === 1.5. НАВИГАЦИОННОЕ МЕНЮ (МАТОВОЕ СТЕКЛО) === */
+        /* === 1.5. НАВИГАЦИОННОЕ МЕНЮ === */
         .navbar {
-            position: fixed; /* Фиксируем сверху */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Поверх всего остального */
-            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный */
-            backdrop-filter: blur(10px); /* Эффект размытия фона */
-            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px 20px;
             transition: 0.3s;
@@ -81,7 +90,6 @@
             color: #fff;
         }
 
-        /* Линия подчеркивания при наведении */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -112,14 +120,14 @@
             transition: 0.3s;
         }
 
-        /* Адаптив меню для мобильных */
+        /* Адаптив меню */
         @media (max-width: 768px) {
             .hamburger { display: block; }
 
             .nav-menu {
                 position: fixed;
-                left: -100%; /* Скрыто слева */
-                top: 60px; /* Высота хедера */
+                left: -100%;
+                top: 60px;
                 gap: 0;
                 flex-direction: column;
                 background-color: #000;
@@ -131,9 +139,8 @@
 
             .nav-item { margin: 25px 0; }
 
-            .nav-menu.active { left: 0; /* Выезжает */ }
+            .nav-menu.active { left: 0; }
 
-            /* Анимация превращения гамбургера в крестик */
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -881,7 +888,6 @@
     </footer>
 
     <script>
-        // Анимация появления при скролле
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -892,7 +898,6 @@
         const hiddenElements = document.querySelectorAll('.hidden-element');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // Скрипт для работы МЕНЮ
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
         const navLinks = document.querySelectorAll(".nav-link");
@@ -902,7 +907,6 @@
             navMenu.classList.toggle("active");
         });
 
-        // Закрываем меню при клике на ссылку (чтобы удобно было на мобильном)
         navLinks.forEach(n => n.addEventListener("click", () => {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
