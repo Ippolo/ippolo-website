@@ -153,7 +153,7 @@
         .hamburger { display: none; cursor: pointer; z-index: 1003; }
         .bar { display: block; width: 25px; height: 2px; margin: 5px auto; background-color: #fff; transition: 0.3s; }
 
-        /* === АДАПТИВ МЕНЮ (НАСТРОЕНО) === */
+        /* === АДАПТИВ МЕНЮ === */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
@@ -162,29 +162,25 @@
             .hamburger { 
                 display: block; 
                 position: absolute;
-                /* ВОЗВРАЩЕНО: Стандартный отступ справа */
-                right: 20px; 
+                right: 35px; /* Отступ от края */
                 top: 50%;
                 transform: translateY(-50%);
-                padding: 10px; /* Увеличиваем область нажатия */
+                padding: 10px; 
             }
             
             .nav-menu {
                 position: fixed; 
                 left: 0; 
-                top: 60px; /* Под шапкой */
+                top: 60px; 
                 width: 100%; 
                 height: auto; 
                 
-                /* Полупрозрачный черный */
+                /* Полупрозрачный черный фон */
                 background-color: rgba(0, 0, 0, 0.9); 
                 backdrop-filter: blur(10px); 
                 
                 border-bottom: 1px solid rgba(255,255,255,0.2);
-                
-                /* ЦЕНТРИРОВАНИЕ ТЕКСТА */
-                padding: 40px 0; /* Отступы только сверху и снизу */
-                margin: 0; /* Убираем возможные отступы списка */
+                padding: 40px 0;
                 
                 flex-direction: column;
                 align-items: center; 
@@ -202,14 +198,14 @@
             .nav-item { 
                 margin: 0; 
                 width: 100%;
-                text-align: center; /* Текст внутри пункта */
+                text-align: center;
                 display: flex;
                 justify-content: center;
             }
 
             .nav-link {
                 font-size: 14px; 
-                display: inline-block;
+                display: inline-block; /* Полоска ровно под текстом */
                 padding: 5px 0;
             }
             
@@ -219,7 +215,6 @@
                 visibility: visible; 
             }
             
-            /* Крестик остается на месте гамбургера */
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -851,24 +846,26 @@
     </section>
 
     <section class="upcoming-section">
+        
         <div class="upcoming-card hidden-element">
-            <div class="upcoming-badge">PRE-ORDER</div>
+            <div class="upcoming-badge" style="background: #fff; color: #000;">OUT NOW</div>
             
             <img src="new-track.jpg" alt="New Release Cover" class="upcoming-img" loading="lazy" decoding="async" width="250" height="250">
             
             <div class="upcoming-content">
-                <div class="upcoming-label">New Single Coming Soon</div>
+                <div class="upcoming-label">New EP Out Now</div>
                 
                 <h2 class="upcoming-title">SPIRIT DRIFT</h2> 
                 
-                <div class="upcoming-date">RELEASE DATE: 16.01.2026</div>
+                <div class="upcoming-date">AVAILABLE ON ALL PLATFORMS</div>
                 
                 <a href="https://go.protonradio.com/r/rl0fxJkk7pxWE" target="_blank" class="presave-btn">
-                    PRE-ORDER NOW
+                    LISTEN NOW
                 </a>
             </div>
         </div>
-    </section>
+
+        </section>
 
     <section id="music" class="music-section">
         <div class="section-title hidden-element">Latest Releases</div>
