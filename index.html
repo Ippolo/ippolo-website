@@ -690,7 +690,15 @@
 
         img[src*="label2.png"] { height: 38px; }
         img[src*="label4.png"] { margin-left: -5px; height: 45px; }
-        img[src*="label5.png"] { height: 40px; }
+        
+        /* ИСПРАВЛЕНИЯ ДЛЯ ЛОГОТИПА THE PURR */
+        img[src*="label5.png"] { 
+            height: 55px; /* Увеличили размер, чтобы смотрелся органично */
+            filter: invert(1); 
+        }
+        img[src*="label5.png"]:hover { 
+            filter: invert(1); /* Теперь при наведении он не будет становиться черным! */
+        }
 
         .bio-image {
             flex: 1;
@@ -865,7 +873,7 @@
                 
                 <div class="upcoming-date">RELEASE DATE: 20.08.2026</div>
                 
-                <a href="https://go.protonradio.com/r/rl0fxJkk7pxWE" target="_blank" class="presave-btn">
+                <a href="YOUR_PRE_SAVE_LINK" target="_blank" class="presave-btn">
                     PRE-SAVE NOW
                 </a>
             </div>
@@ -879,13 +887,12 @@
         <!-- Сетка автоматически перенесет релизы на новые строки -->
         <div class="music-grid">
 
-            <!-- ВСТАВЛЕННЫЙ SPIRIT DRIFT -->
             <div class="release-card hidden-element">
                 <img src="spirit-drift.jpg" alt="Spirit Drift Cover" class="cover-art" loading="lazy">
                 <div class="track-info">
                     <h2 class="track-title">Spirit Drift</h2>
                     <div class="track-desc">Single</div>
-                    <a href="https://fanlink.to/spirit-drift" target="_blank" class="listen-btn fanlink-btn">
+                    <a href="https://go.protonradio.com/r/rl0fxJkk7pxWE" target="_blank" class="listen-btn fanlink-btn">
                         <i class="fas fa-play"></i> Listen Now
                     </a>
                 </div>
@@ -989,7 +996,6 @@
                             <img src="label4.png" alt="RYNTH" class="label-logo" loading="lazy">
                         </a>
 
-                        <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА THE PURR -->
                         <a href="https://www.beatport.com/label/the-purr/42258" target="_blank">
                             <img src="label5.png" alt="The Purr" class="label-logo" loading="lazy">
                         </a>
