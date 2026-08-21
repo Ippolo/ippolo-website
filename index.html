@@ -6,7 +6,7 @@
     
     <!-- === SEO И ОПТИМИЗАЦИЯ === -->
     <title>IPPOLO | Electronic Music Producer</title>
-    <meta name="description" content="IPPOLO is an electronic music producer (Organic House, Progressive, Trance) based in Minsk. Listen to the latest tracks and the upcoming EP 'Duality' on The Purr.">
+    <meta name="description" content="IPPOLO is an electronic music producer (Organic House, Progressive, Trance) based in Minsk. Listen to the latest tracks and the new EP 'Duality' on The Purr.">
     
     <!-- === FAVICON === -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -16,7 +16,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="IPPOLO | Electronic Music Producer">
-    <meta property="og:description" content="New EP 'Duality' coming Aug 20 on The Purr. Pre-save now.">
+    <meta property="og:description" content="New EP 'Duality' is OUT NOW on The Purr. Listen and support.">
     <meta property="og:url" content="https://ippolo-music.com"> 
     <meta property="og:image" content="cover.jpg"> 
     <meta property="og:type" content="music.musician">
@@ -320,7 +320,7 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
-        /* === 2.5. СЕКЦИЯ UPCOMING === */
+        /* === 2.5. СЕКЦИЯ ГЛАВНОГО РЕЛИЗА === */
         .upcoming-section {
             padding: 80px 20px 40px;
             background-color: #000;
@@ -690,15 +690,8 @@
 
         img[src*="label2.png"] { height: 38px; }
         img[src*="label4.png"] { margin-left: -5px; height: 45px; }
-        
-        /* ИСПРАВЛЕНИЯ ДЛЯ ЛОГОТИПА THE PURR */
-        img[src*="label5.png"] { 
-            height: 55px; /* Увеличили размер, чтобы смотрелся органично */
-            filter: invert(1); 
-        }
-        img[src*="label5.png"]:hover { 
-            filter: invert(1); /* Теперь при наведении он не будет становиться черным! */
-        }
+        img[src*="label5.png"] { height: 30px; filter: invert(1); } 
+        img[src*="label5.png"]:hover { filter: invert(1); } 
 
         .bio-image {
             flex: 1;
@@ -858,11 +851,11 @@
         </div>
     </section>
 
-    <!-- === АНОНС НОВОГО EP DUALITY === -->
+    <!-- === АНОНС DUALITY === -->
     <section class="upcoming-section">
         
         <div class="upcoming-card hidden-element">
-            <div class="upcoming-badge">PRE-RELEASE</div>
+            <div class="upcoming-badge">OUT NOW</div>
             
             <img src="duality-cover.jpg" alt="Duality EP Cover" class="upcoming-img" loading="lazy" decoding="async" width="250" height="250">
             
@@ -871,10 +864,11 @@
                 
                 <h2 class="upcoming-title">DUALITY</h2> 
                 
-                <div class="upcoming-date">RELEASE DATE: 20.08.2026</div>
+                <div class="upcoming-date">AVAILABLE ON ALL PLATFORMS</div>
                 
-                <a href="https://go.protonradio.com/r/rldZQEDWPJvYY" target="_blank" class="presave-btn">
-                    PRE-SAVE NOW
+                <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШ FANLINK/ССЫЛКУ НА РЕЛИЗ DUALITY -->
+                <a href="YOUR_RELEASE_LINK" target="_blank" class="presave-btn">
+                    LISTEN NOW
                 </a>
             </div>
         </div>
